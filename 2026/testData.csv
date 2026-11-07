@@ -1,0 +1,7 @@
+Serial No.,Admission ID,Specialization,Start Date,gender,region,highest_education,imd_band,age_band,num_of_prev_attempts,studied_credits,disability,GRE Score,TOEFL Score,University Rating,SOP,LOR,CGPA,Research
+1438,595309,GGG,Jan-22,F,East Midlands Region,Lower Than A Level,60-70%,0-35,0,30,N,312,116,3,2,3,8.9,0
+1439,678221,Agriculture Science,Sep-23,F,London Region,A Level or Equivalent,80-90%,0-35,0,120,N,322,110,4,5,4.5,9.16,1
+1431,567623,Psychology and Personal Care,Jan-22,M,Scotland,HE Qualification,20-30%,35-55,0,60,N,322,110,5,4.5,5,9.18,1
+1432,464604,Computer Science and Technology,Sep-22,F,London Region,Lower Than A Level,50-60%,0-35,2,60,Y,312,102,3,2.5,3.5,8.66,0
+7752,605154,Computer Science and Technology,Jan-22,M,Yorkshire Region,Lower Than A Level,40-50%,0-35,0,120,N,326,100,5,4,5,8,1
+7753,479027,Computer Science and Technology,Sep-22,F,North Region,Lower Than A Level,40-50%,0-35,0,120,N,318,103,3,3.5,3.5,8.35,1
