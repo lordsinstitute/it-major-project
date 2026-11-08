@@ -1,0 +1,59 @@
+{% extends 'expert/base_expert.html' %}
+{% block title %}Expert Dashboard - KisanSathi{% endblock %}
+{% block expert_content %}
+<div class="page-header" style="background: linear-gradient(135deg, #1565c0, #1976d2);">
+    <h2><i class="fas fa-tachometer-alt"></i> Expert Dashboard</h2>
+    <p>Welcome, Dr. {{ request.user.get_full_name|default:request.user.username }}!</p>
+</div>
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card" style="border-left: 5px solid #1565c0;">
+            <div class="card-body">
+                <p class="text-muted mb-1">Guides Uploaded</p>
+                <div class="stat-number" style="color: #1565c0;">{{ total_guides }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="border-left: 5px solid #ff8f00;">
+            <div class="card-body">
+                <p class="text-muted mb-1">Pending Queries</p>
+                <div class="stat-number" style="color: #ff8f00;">{{ pending_queries }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card" style="border-left: 5px solid #4caf50;">
+            <div class="card-body">
+                <p class="text-muted mb-1">Queries Answered</p>
+                <div class="stat-number" style="color: #4caf50;">{{ answered_queries }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header" style="background: linear-gradient(135deg, #1565c0, #1976d2); color: #fff;">
+        <i class="fas fa-list"></i> Recent Pending Queries
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead><tr><th>Title</th><th>Farmer</th><th>Crop</th><th>Date</th><th>Action</th></tr></thead>
+                <tbody>
+                    {% for q in recent_queries %}
+                    <tr>
+                        <td>{{ q.title }}</td>
+                        <td>{{ q.farmer.get_full_name|default:q.farmer.username }}</td>
+                        <td>{{ q.crop|default:"-" }}</td>
+                        <td>{{ q.created_at|date:"d M Y" }}</td>
+                        <td><a href="{% url 'expert_respond_query' q.id %}" class="btn btn-sm btn-primary">Respond</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="5" class="text-center text-muted py-3">No pending queries.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

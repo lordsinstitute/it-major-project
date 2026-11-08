@@ -1,0 +1,104 @@
+{% extends 'farmer/base_farmer.html' %}
+{% block title %}Chatbot - KisanSathi{% endblock %}
+{% block farmer_content %}
+<div class="page-header">
+    <h2><i class="fas fa-robot"></i> KisanSathi AI Chatbot</h2>
+    <p>Ask anything about farming, crops, diseases, schemes, and more</p>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-9">
+        <div class="card" style="border-radius: 16px; overflow: hidden;">
+            <div class="card-header green py-3">
+                <i class="fas fa-comment-dots"></i> Chat with KisanSathi Bot
+                <span class="float-right badge badge-light">Online</span>
+            </div>
+            <!-- Chat window -->
+            <div id="chat-window" style="height: 420px; overflow-y: auto; background: #fafafa; padding: 20px;">
+                <div class="d-flex mb-3">
+                    <div style="background: #2e7d32; color: #fff; border-radius: 15px 15px 15px 0; padding: 12px 16px; max-width: 80%;">
+                        <strong>KisanBot:</strong> Namaste! I am KisanSathi AI Chatbot 🌱<br>
+                        I can help you with crop diseases, fertilizers, government schemes, crop prices, and more!<br>
+                        <em>Type your question below and press Enter or Send.</em>
+                    </div>
+                </div>
+            </div>
+            <!-- Input area -->
+            <div class="card-footer p-3">
+                <div class="input-group">
+                    <input type="text" id="user-input" class="form-control form-control-lg"
+                        placeholder="Type your farming question here..." autocomplete="off">
+                    <div class="input-group-append">
+                        <button class="btn btn-green btn-lg" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i> Send
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <small class="text-muted">Try: "disease in wheat", "fertilizer for rice", "government schemes", "crop prices"</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const chatWindow = document.getElementById('chat-window');
+    const userInput = document.getElementById('user-input');
+
+    userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    function sendMessage() {
+        const message = userInput.value.trim();
+        if (!message) return;
+
+        // Add user message
+        appendMessage(message, 'user');
+        userInput.value = '';
+
+        // Send to backend
+        fetch("{% url 'chatbot_api' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: JSON.stringify({message: message})
+        })
+        .then(resp => resp.json())
+        .then(data => appendMessage(data.response, 'bot'))
+        .catch(() => appendMessage('Sorry, I encountered an error. Please try again.', 'bot'));
+    }
+
+    function appendMessage(text, sender) {
+        const div = document.createElement('div');
+        div.classList.add('d-flex', 'mb-3');
+        if (sender === 'user') {
+            div.classList.add('justify-content-end');
+            div.innerHTML = `<div style="background: #1976d2; color: #fff; border-radius: 15px 15px 0 15px; padding: 12px 16px; max-width: 80%;"><strong>You:</strong><br>${text}</div>`;
+        } else {
+            div.innerHTML = `<div style="background: #2e7d32; color: #fff; border-radius: 15px 15px 15px 0; padding: 12px 16px; max-width: 80%;"><strong>KisanBot:</strong><br>${text}</div>`;
+        }
+        chatWindow.appendChild(div);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'farmer/base_farmer.html' %}
+{% block title %}Farmer Dashboard - KisanSathi{% endblock %}
+{% block farmer_content %}
+<div class="page-header">
+    <h2><i class="fas fa-tachometer-alt"></i> Farmer Dashboard</h2>
+    <p>Welcome back, {{ request.user.get_full_name|default:request.user.username }}! Here's your overview.</p>
+</div>
+
+<!-- Stats -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="text-muted mb-1">Total Queries</p>
+                        <div class="stat-number">{{ total_queries }}</div>
+                    </div>
+                    <i class="fas fa-question-circle fa-2x text-muted"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="border-left: 5px solid #4caf50;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="text-muted mb-1">Answered</p>
+                        <div class="stat-number" style="color: #4caf50;">{{ answered_queries }}</div>
+                    </div>
+                    <i class="fas fa-check-circle fa-2x text-success"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="border-left: 5px solid #ff8f00;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="text-muted mb-1">Pending</p>
+                        <div class="stat-number" style="color: #ff8f00;">{{ pending_queries }}</div>
+                    </div>
+                    <i class="fas fa-clock fa-2x text-warning"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="border-left: 5px solid #1565c0;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="text-muted mb-1">Land Area</p>
+                        <div class="stat-number" style="color: #1565c0;">{{ farmer.land_area }}</div>
+                        <small class="text-muted">Acres</small>
+                    </div>
+                    <i class="fas fa-ruler-combined fa-2x text-muted"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Access -->
+<div class="row mb-4">
+    <div class="col-12"><h5 style="color: #2e7d32; font-weight: 700;"><i class="fas fa-bolt"></i> Quick Access - AI Features</h5></div>
+    <div class="col-md-3 mb-3">
+        <a href="{% url 'ai_disease_detection' %}" class="card text-center p-3 text-decoration-none" style="border-top: 3px solid #4caf50; display: block;">
+            <i class="fas fa-microscope fa-2x mb-2" style="color: #4caf50;"></i>
+            <p class="mb-0 font-weight-600" style="color: #1b5e20;">Disease Detection</p>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a href="{% url 'ai_yield_prediction' %}" class="card text-center p-3 text-decoration-none" style="border-top: 3px solid #ff8f00; display: block;">
+            <i class="fas fa-chart-line fa-2x mb-2" style="color: #ff8f00;"></i>
+            <p class="mb-0 font-weight-600" style="color: #1b5e20;">Yield Prediction</p>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a href="{% url 'ai_fertilizer' %}" class="card text-center p-3 text-decoration-none" style="border-top: 3px solid #1565c0; display: block;">
+            <i class="fas fa-flask fa-2x mb-2" style="color: #1565c0;"></i>
+            <p class="mb-0 font-weight-600" style="color: #1b5e20;">Fertilizer Advice</p>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a href="{% url 'farmer_chatbot' %}" class="card text-center p-3 text-decoration-none" style="border-top: 3px solid #6a1b9a; display: block;">
+            <i class="fas fa-robot fa-2x mb-2" style="color: #6a1b9a;"></i>
+            <p class="mb-0 font-weight-600" style="color: #1b5e20;">AI Chatbot</p>
+        </a>
+    </div>
+</div>
+
+<!-- Recent Queries -->
+<div class="card">
+    <div class="card-header green">
+        <i class="fas fa-list"></i> Recent Queries
+    </div>
+    <div class="card-body p-0">
+        {% if recent_queries %}
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Crop</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for q in recent_queries %}
+                    <tr>
+                        <td>{{ q.title }}</td>
+                        <td>{{ q.crop|default:"-" }}</td>
+                        <td>
+                            {% if q.status == 'answered' %}
+                            <span class="badge badge-success">Answered</span>
+                            {% else %}
+                            <span class="badge badge-warning">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ q.created_at|date:"d M Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="p-4 text-center text-muted">
+            <i class="fas fa-inbox fa-3x mb-3"></i>
+            <p>No queries yet. <a href="{% url 'farmer_post_query' %}">Post your first query!</a></p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

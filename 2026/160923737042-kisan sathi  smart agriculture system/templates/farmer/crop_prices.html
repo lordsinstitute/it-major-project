@@ -1,0 +1,40 @@
+{% extends 'farmer/base_farmer.html' %}
+{% block title %}Crop Prices - KisanSathi{% endblock %}
+{% block farmer_content %}
+<div class="page-header">
+    <h2><i class="fas fa-rupee-sign"></i> Current Crop Market Prices</h2>
+    <p>Live market prices updated by government administrators</p>
+</div>
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Crop Name</th>
+                        <th>Category</th>
+                        <th>Price (₹/Quintal)</th>
+                        <th>Market</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for price in prices %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ price.crop_name }}</strong></td>
+                        <td>{{ price.get_crop_type_display }}</td>
+                        <td><strong style="color: #2e7d32;">₹ {{ price.price_per_quintal }}</strong></td>
+                        <td>{{ price.market_location }}</td>
+                        <td><small>{{ price.updated_at|date:"d M Y, H:i" }}</small></td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="6" class="text-center text-muted py-4">No prices available yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 sidebar px-0">
+            <div class="text-center py-3" style="background: #ffebee;">
+                <i class="fas fa-user-shield" style="font-size: 3rem; color: #c62828;"></i>
+                <p class="mb-0 mt-1 font-weight-bold" style="color: #b71c1c;">{{ request.user.username }}</p>
+                <small class="text-muted">Administrator</small>
+            </div>
+            <nav class="nav flex-column mt-3">
+                <a class="nav-link {% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}" href="{% url 'admin_dashboard' %}">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'admin_approve_accounts' %}active{% endif %}" href="{% url 'admin_approve_accounts' %}">
+                    <i class="fas fa-user-check"></i> Approve Accounts
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'admin_update_prices' %}active{% endif %}" href="{% url 'admin_update_prices' %}">
+                    <i class="fas fa-rupee-sign"></i> Update Prices
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'admin_schemes' %}active{% endif %}" href="{% url 'admin_schemes' %}">
+                    <i class="fas fa-landmark"></i> Post Policies
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'admin_all_queries' %}active{% endif %}" href="{% url 'admin_all_queries' %}">
+                    <i class="fas fa-comments"></i> All Queries
+                </a>
+                <hr>
+                <a class="nav-link text-danger" href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+        <div class="col-md-10 main-content">
+            {% block admin_content %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

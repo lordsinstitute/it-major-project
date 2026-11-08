@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar px-0">
+            <div class="text-center py-3" style="background: #e8f5e9;">
+                <i class="fas fa-user-circle" style="font-size: 3rem; color: #2e7d32;"></i>
+                <p class="mb-0 mt-1 font-weight-bold" style="color: #1b5e20;">{{ request.user.get_full_name|default:request.user.username }}</p>
+                <small class="text-muted">Farmer</small>
+            </div>
+            <nav class="nav flex-column mt-3">
+                <a class="nav-link {% if request.resolver_match.url_name == 'farmer_dashboard' %}active{% endif %}" href="{% url 'farmer_dashboard' %}">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'farmer_schemes' %}active{% endif %}" href="{% url 'farmer_schemes' %}">
+                    <i class="fas fa-landmark"></i> Schemes
+                </a>
+                <a class="nav-link {% if 'ai' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'ai_dashboard' %}">
+                    <i class="fas fa-robot"></i> AI Suggestions
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'farmer_crop_prices' %}active{% endif %}" href="{% url 'farmer_crop_prices' %}">
+                    <i class="fas fa-rupee-sign"></i> Crop Prices
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'farmer_connect' %}active{% endif %}" href="{% url 'farmer_connect' %}">
+                    <i class="fas fa-network-wired"></i> Connect Network
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'farmer_post_query' %}active{% endif %}" href="{% url 'farmer_post_query' %}">
+                    <i class="fas fa-question-circle"></i> Post Query
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'farmer_query_result' %}active{% endif %}" href="{% url 'farmer_query_result' %}">
+                    <i class="fas fa-comments"></i> Query Result
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'farmer_guides' %}active{% endif %}" href="{% url 'farmer_guides' %}">
+                    <i class="fas fa-book"></i> Guides
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'farmer_chatbot' %}active{% endif %}" href="{% url 'farmer_chatbot' %}">
+                    <i class="fas fa-comment-dots"></i> Chatbot
+                </a>
+                <hr>
+                <a class="nav-link text-danger" href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+        <!-- Main Content -->
+        <div class="col-md-10 main-content">
+            {% block farmer_content %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

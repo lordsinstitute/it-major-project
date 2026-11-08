@@ -1,0 +1,76 @@
+-- ============================================================
+-- KisanSathi Database Setup
+-- Run this in MySQL console before starting the project
+-- ============================================================
+
+-- Create database
+CREATE DATABASE IF NOT EXISTS kisansathi_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE kisansathi_db;
+
+-- ============================================================
+-- NOTE: Django will auto-create all tables via migrations.
+-- This file creates the database and inserts sample data.
+-- Run migrations first: python manage.py migrate
+-- Then run sample data inserts below.
+-- ============================================================
+
+-- Sample Crop Prices (insert after migrations)
+-- INSERT INTO adminpanel_cropprice (crop_name, crop_type, price_per_quintal, market_location, updated_at)
+-- VALUES
+-- ('Wheat', 'wheat', 2150.00, 'National Average', NOW()),
+-- ('Rice/Paddy', 'rice', 1940.00, 'National Average', NOW()),
+-- ('Maize', 'maize', 1870.00, 'National Average', NOW()),
+-- ('Cotton', 'cotton', 6620.00, 'National Average', NOW()),
+-- ('Sugarcane', 'sugarcane', 315.00, 'National Average', NOW()),
+-- ('Soybean', 'soybean', 4300.00, 'National Average', NOW()),
+-- ('Groundnut', 'groundnut', 5550.00, 'National Average', NOW()),
+-- ('Sunflower', 'sunflower', 5800.00, 'National Average', NOW()),
+-- ('Tomato', 'tomato', 1200.00, 'Hyderabad Mandi', NOW()),
+-- ('Onion', 'onion', 1800.00, 'Lasalgaon Mandi', NOW()),
+-- ('Potato', 'potato', 1200.00, 'Agra Mandi', NOW()),
+-- ('Chilli', 'chilli', 7500.00, 'Guntur Mandi', NOW());
+
+-- Sample Government Schemes (insert after migrations)
+-- INSERT INTO adminpanel_scheme (title, category, description, eligibility, benefits, how_to_apply, deadline, website_link, is_active, created_at, updated_at)
+-- VALUES
+-- ('PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)', 'scheme',
+--  'Financial support of Rs. 6000 per year to all landholding farmer families.',
+--  'All landholding farmers with cultivable land.',
+--  'Rs. 6000/year in 3 equal installments of Rs. 2000 each.',
+--  'Register at local CSC center or pmkisan.gov.in with Aadhaar and bank details.',
+--  NULL, 'https://pmkisan.gov.in', 1, NOW(), NOW()),
+-- ('Fasal Bima Yojana (PMFBY)', 'insurance',
+--  'Crop insurance scheme to provide financial support to farmers in case of crop loss.',
+--  'All farmers growing notified crops in notified areas.',
+--  'Insurance coverage for crop loss due to natural calamities, pests, diseases.',
+--  'Apply through nearest bank or agriculture department before sowing season.',
+--  NULL, 'https://pmfby.gov.in', 1, NOW(), NOW()),
+-- ('Kisan Credit Card (KCC)', 'loan',
+--  'Easy credit facility for farmers to meet their agricultural needs.',
+--  'All farmers including tenant farmers, sharecroppers, and SHG members.',
+--  'Credit limit up to Rs. 3 lakh at subsidized interest rate of 4% per annum.',
+--  'Apply at nearest bank branch with land documents and ID proof.',
+--  NULL, 'https://agricoop.nic.in', 1, NOW(), NOW()),
+-- ('Soil Health Card Scheme', 'scheme',
+--  'Provides farmers with soil health cards showing nutrient status of soil.',
+--  'All farmers across India.',
+--  'Free soil testing and personalized fertilizer recommendations.',
+--  'Contact nearest Krishi Vigyan Kendra (KVK) or agriculture department.',
+--  NULL, 'https://soilhealth.dac.gov.in', 1, NOW(), NOW());
+
+-- ============================================================
+-- Chatbot FAQ sample data (insert after migrations)
+-- INSERT INTO farmer_chatbotfaq (question_keyword, answer, category, is_active)
+-- VALUES
+-- ('paddy', 'Paddy (rice) requires well-drained clay soils. Ideal temperature: 21-37°C. Needs 1200-2000mm rainfall or irrigation. Apply 120kg Urea + 60kg DAP + 30kg MOP per acre.', 'crops', 1),
+-- ('neem', 'Neem-based pesticides (Neem oil 1500 ppm) are organic and safe. Spray 5ml per liter of water. Effective against aphids, whiteflies, and leaf miners.', 'pesticides', 1),
+-- ('drip irrigation', 'Drip irrigation saves 40-60% water. Initial cost: Rs 40,000-80,000 per acre. Government subsidy available up to 90% for SC/ST farmers under PMKSY scheme.', 'irrigation', 1),
+-- ('organic farming', 'Organic farming avoids synthetic chemicals. Use compost, vermicompost, and bio-pesticides. Premium prices available. Certification from APEDA required for export.', 'general', 1);
+
+-- ============================================================
+-- To create admin user after migrations, run:
+-- python manage.py createsuperuser
+-- Username: admin | Password: admin | Email: admin@kisansathi.com
+-- ============================================================
+
+SELECT 'Database kisansathi_db created successfully!' AS Message;

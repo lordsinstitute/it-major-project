@@ -1,0 +1,55 @@
+{% extends 'farmer/base_farmer.html' %}
+{% block title %}AI Features - KisanSathi{% endblock %}
+{% block farmer_content %}
+<div class="page-header">
+    <h2><i class="fas fa-robot"></i> AI Suggestions</h2>
+    <p>Artificial Intelligence powered tools for smart farming decisions</p>
+</div>
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center" style="border-top: 4px solid #4caf50;">
+            <div class="card-body p-4">
+                <i class="fas fa-microscope fa-3x mb-3" style="color: #4caf50;"></i>
+                <h5 style="color: #1b5e20; font-weight: 700;">Pest & Disease Detection</h5>
+                <p class="text-muted">Upload a photo of your crop and AI will detect diseases and suggest pesticides.</p>
+                <a href="{% url 'ai_disease_detection' %}" class="btn btn-green btn-block mt-3">
+                    <i class="fas fa-arrow-right"></i> Go to Disease Detection
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center" style="border-top: 4px solid #ff8f00;">
+            <div class="card-body p-4">
+                <i class="fas fa-chart-line fa-3x mb-3" style="color: #ff8f00;"></i>
+                <h5 style="color: #1b5e20; font-weight: 700;">Crop Yield Prediction</h5>
+                <p class="text-muted">Enter crop type, land area and weather to predict expected yield.</p>
+                <a href="{% url 'ai_yield_prediction' %}" class="btn btn-warning btn-block mt-3 text-white">
+                    <i class="fas fa-arrow-right"></i> Go to Yield Prediction
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center" style="border-top: 4px solid #1565c0;">
+            <div class="card-body p-4">
+                <i class="fas fa-flask fa-3x mb-3" style="color: #1565c0;"></i>
+                <h5 style="color: #1b5e20; font-weight: 700;">Fertilizer Recommendation</h5>
+                <p class="text-muted">Get personalized fertilizer advice based on soil type, crop, and weather.</p>
+                <a href="{% url 'ai_fertilizer' %}" class="btn btn-primary btn-block mt-3">
+                    <i class="fas fa-arrow-right"></i> Get Fertilizer Advice
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card mt-2">
+    <div class="card-header green"><i class="fas fa-history"></i> View Past AI Results</div>
+    <div class="card-body">
+        <p class="text-muted mb-2">View all your past AI predictions and recommendations.</p>
+        <a href="{% url 'ai_history' %}" class="btn btn-outline-success">
+            <i class="fas fa-history"></i> View AI History
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'farmer/base_farmer.html' %}
+{% block title %}Disease Detection - KisanSathi{% endblock %}
+{% block farmer_content %}
+<div class="page-header">
+    <h2><i class="fas fa-microscope"></i> Pest & Disease Detection</h2>
+    <p>Upload crop image for AI-powered disease diagnosis and pesticide recommendation</p>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header green"><strong><i class="fas fa-upload"></i> Upload Crop Image</strong></div>
+            <div class="card-body p-4">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Select Crop Type</label>
+                        <select name="crop_type" class="form-control">
+                            {% for val, label in crop_choices %}
+                            <option value="{{ val }}">{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Crop Image *</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="image" name="image" accept="image/*" required>
+                            <label class="custom-file-label" for="image">Choose image...</label>
+                        </div>
+                    </div>
+                    <div id="preview-box" class="text-center mb-3" style="display:none;">
+                        <img id="preview-img" src="#" alt="Preview" style="max-height:180px; border-radius:10px; border:2px solid #4caf50;">
+                    </div>
+                    <button type="submit" class="btn btn-green btn-block btn-lg">
+                        <i class="fas fa-search"></i> Detect Disease
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        {% if result %}
+        <div class="card">
+            <div class="card-header green"><strong><i class="fas fa-robot"></i> AI Detection Result</strong></div>
+            <div class="card-body">
+                <div class="result-box mb-3">
+                    <h5><i class="fas fa-bug text-danger"></i> Detected Disease:</h5>
+                    <p class="h4 font-weight-bold text-danger">{{ result }}</p>
+                </div>
+                <div class="result-box">
+                    <h5><i class="fas fa-spray-can" style="color: #1565c0;"></i> Recommended Pesticide / Treatment:</h5>
+                    <p class="font-weight-bold" style="color: #1b5e20; font-size: 1.05rem;">{{ pesticide_suggestion }}</p>
+                </div>
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> This is an AI prediction. Please consult an agricultural expert for confirmation.
+                    <a href="{% url 'farmer_post_query' %}" class="btn btn-sm btn-outline-info ml-2">Ask Expert</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center py-5 text-muted">
+            <i class="fas fa-leaf fa-5x mb-3" style="color: #a5d6a7;"></i>
+            <p>Upload a crop image to get AI disease detection results.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+document.getElementById('image').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        document.querySelector('.custom-file-label').textContent = file.name;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            document.getElementById('preview-img').src = ev.target.result;
+            document.getElementById('preview-box').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+{% endblock %}

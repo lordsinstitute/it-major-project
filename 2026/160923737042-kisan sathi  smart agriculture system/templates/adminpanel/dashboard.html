@@ -1,0 +1,72 @@
+{% extends 'adminpanel/base_admin.html' %}
+{% block title %}Admin Dashboard - KisanSathi{% endblock %}
+{% block admin_content %}
+<div class="page-header" style="background: linear-gradient(135deg, #b71c1c, #c62828);">
+    <h2><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h2>
+    <p>Government Admin Control Panel - KisanSathi</p>
+</div>
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card" style="border-left: 5px solid #4caf50;">
+            <div class="card-body">
+                <p class="text-muted mb-1">Total Farmers</p>
+                <div class="stat-number" style="color: #4caf50;">{{ total_farmers }}</div>
+                <small class="text-success">{{ approved_farmers }} approved</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="border-left: 5px solid #1565c0;">
+            <div class="card-body">
+                <p class="text-muted mb-1">Total Experts</p>
+                <div class="stat-number" style="color: #1565c0;">{{ total_experts }}</div>
+                <small class="text-primary">{{ approved_experts }} approved</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="border-left: 5px solid #ff8f00;">
+            <div class="card-body">
+                <p class="text-muted mb-1">Total Queries</p>
+                <div class="stat-number" style="color: #ff8f00;">{{ total_queries }}</div>
+                <small class="text-warning">{{ pending_queries }} pending</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card" style="border-left: 5px solid #c62828;">
+            <div class="card-body">
+                <p class="text-muted mb-1">Active Schemes</p>
+                <div class="stat-number" style="color: #c62828;">{{ total_schemes }}</div>
+                <small class="text-muted">{{ total_crop_prices }} crop prices</small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3 mb-3">
+        <a href="{% url 'admin_approve_accounts' %}" class="card text-center p-4 text-decoration-none" style="border-top: 3px solid #4caf50; display: block;">
+            <i class="fas fa-user-check fa-2x mb-2" style="color: #4caf50;"></i>
+            <p class="mb-0 font-weight-bold">Approve Accounts</p>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a href="{% url 'admin_update_prices' %}" class="card text-center p-4 text-decoration-none" style="border-top: 3px solid #ff8f00; display: block;">
+            <i class="fas fa-rupee-sign fa-2x mb-2" style="color: #ff8f00;"></i>
+            <p class="mb-0 font-weight-bold">Update Crop Prices</p>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a href="{% url 'admin_schemes' %}" class="card text-center p-4 text-decoration-none" style="border-top: 3px solid #c62828; display: block;">
+            <i class="fas fa-landmark fa-2x mb-2" style="color: #c62828;"></i>
+            <p class="mb-0 font-weight-bold">Post Policies</p>
+        </a>
+    </div>
+    <div class="col-md-3 mb-3">
+        <a href="{% url 'admin_all_queries' %}" class="card text-center p-4 text-decoration-none" style="border-top: 3px solid #1565c0; display: block;">
+            <i class="fas fa-comments fa-2x mb-2" style="color: #1565c0;"></i>
+            <p class="mb-0 font-weight-bold">View All Queries</p>
+        </a>
+    </div>
+</div>
+{% endblock %}

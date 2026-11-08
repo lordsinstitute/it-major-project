@@ -1,0 +1,65 @@
+{% extends 'farmer/base_farmer.html' %}
+{% block title %}Guides - KisanSathi{% endblock %}
+{% block farmer_content %}
+<div class="page-header">
+    <h2><i class="fas fa-book"></i> Expert Guides</h2>
+    <p>Download and view agricultural guides in multiple languages</p>
+</div>
+<!-- Language Selector -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="form-inline">
+            <label class="mr-3"><strong>Select Language:</strong></label>
+            {% for val, label in languages %}
+            <div class="form-check mr-3">
+                <input class="form-check-input" type="radio" name="language" value="{{ val }}"
+                    id="lang_{{ val }}" {% if selected_language == val %}checked{% endif %} onchange="this.form.submit()">
+                <label class="form-check-label" for="lang_{{ val }}">{{ label }}</label>
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-green ml-3"><i class="fas fa-filter"></i> View</button>
+        </form>
+    </div>
+</div>
+{% for guide in guides %}
+<div class="card mb-3">
+    <div class="card-header" style="background: #e8f5e9;">
+        <strong style="color: #1b5e20;">{{ guide.title }}</strong>
+        <span class="badge badge-success ml-2">{{ guide.crop }}</span>
+        <span class="float-right text-muted"><small>By: {{ guide.expert.get_full_name|default:guide.expert.username }}</small></span>
+    </div>
+    <div class="card-body">
+        <p>{{ guide.description }}</p>
+        {% if selected_language == 'english' and guide.content_english %}
+        <div class="result-box">
+            <h6><i class="fas fa-language"></i> English Content:</h6>
+            <p>{{ guide.content_english }}</p>
+        </div>
+        {% elif selected_language == 'telugu' and guide.content_telugu %}
+        <div class="result-box">
+            <h6><i class="fas fa-language"></i> Telugu Content:</h6>
+            <p>{{ guide.content_telugu }}</p>
+        </div>
+        {% elif selected_language == 'hindi' and guide.content_hindi %}
+        <div class="result-box">
+            <h6><i class="fas fa-language"></i> Hindi Content:</h6>
+            <p>{{ guide.content_hindi }}</p>
+        </div>
+        {% else %}
+        <p class="text-muted"><em>Content not available in {{ selected_language|title }}.</em></p>
+        {% endif %}
+        {% if guide.file %}
+        <a href="{{ guide.file.url }}" class="btn btn-sm btn-green mt-2" download>
+            <i class="fas fa-download"></i> Download Guide
+        </a>
+        {% endif %}
+    </div>
+    <div class="card-footer text-muted"><small>{{ guide.created_at|date:"d M Y" }}</small></div>
+</div>
+{% empty %}
+<div class="text-center py-5 text-muted">
+    <i class="fas fa-book-open fa-4x mb-3"></i>
+    <p>No guides available yet.</p>
+</div>
+{% endfor %}
+{% endblock %}

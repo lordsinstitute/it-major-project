@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %}KisanSathi - Home{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<div style="background: linear-gradient(135deg, #1b5e20, #2e7d32, #388e3c); color: #fff; padding: 80px 20px; text-align: center;">
+    <div class="container">
+        <i class="fas fa-seedling" style="font-size: 4rem; color: #a5d6a7; margin-bottom: 20px;"></i>
+        <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 15px;">Welcome to KisanSathi</h1>
+        <p style="font-size: 1.3rem; opacity: 0.9; max-width: 700px; margin: 0 auto 30px;">
+            AI-Assisted Farmer Support System - Empowering Indian Farmers with Technology, Expert Knowledge, and Government Schemes
+        </p>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'farmer_signup' %}" class="btn btn-warning btn-lg btn-block" style="font-weight: 600; border-radius: 25px;">
+                    <i class="fas fa-user-plus"></i> Farmer Signup
+                </a>
+            </div>
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'expert_signup' %}" class="btn btn-light btn-lg btn-block" style="font-weight: 600; border-radius: 25px; color: #2e7d32;">
+                    <i class="fas fa-user-md"></i> Expert Signup
+                </a>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-2">
+            <div class="col-md-2 mb-2">
+                <a href="{% url 'farmer_login' %}" class="btn btn-outline-light btn-block" style="border-radius: 25px;">
+                    <i class="fas fa-sign-in-alt"></i> Farmer Login
+                </a>
+            </div>
+            <div class="col-md-2 mb-2">
+                <a href="{% url 'expert_login' %}" class="btn btn-outline-light btn-block" style="border-radius: 25px;">
+                    <i class="fas fa-sign-in-alt"></i> Expert Login
+                </a>
+            </div>
+            <div class="col-md-2 mb-2">
+                <a href="{% url 'admin_login' %}" class="btn btn-outline-warning btn-block" style="border-radius: 25px;">
+                    <i class="fas fa-user-shield"></i> Admin Login
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4" style="color: #2e7d32; font-weight: 700;">What KisanSathi Offers</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center" style="border-top: 4px solid #4caf50;">
+                <div class="card-body p-4">
+                    <i class="fas fa-microscope" style="font-size: 2.5rem; color: #4caf50; margin-bottom: 15px;"></i>
+                    <h5 style="color: #1b5e20; font-weight: 700;">AI Disease Detection</h5>
+                    <p class="text-muted">Upload crop photos and get instant disease diagnosis with pesticide recommendations powered by AI.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center" style="border-top: 4px solid #ff8f00;">
+                <div class="card-body p-4">
+                    <i class="fas fa-chart-line" style="font-size: 2.5rem; color: #ff8f00; margin-bottom: 15px;"></i>
+                    <h5 style="color: #1b5e20; font-weight: 700;">Yield Prediction</h5>
+                    <p class="text-muted">Predict crop yield based on area, weather conditions, and crop type using AI algorithms.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center" style="border-top: 4px solid #1565c0;">
+                <div class="card-body p-4">
+                    <i class="fas fa-flask" style="font-size: 2.5rem; color: #1565c0; margin-bottom: 15px;"></i>
+                    <h5 style="color: #1b5e20; font-weight: 700;">Fertilizer Recommendation</h5>
+                    <p class="text-muted">Get personalized fertilizer advice based on your soil type, crop, and weather conditions.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center" style="border-top: 4px solid #6a1b9a;">
+                <div class="card-body p-4">
+                    <i class="fas fa-comments" style="font-size: 2.5rem; color: #6a1b9a; margin-bottom: 15px;"></i>
+                    <h5 style="color: #1b5e20; font-weight: 700;">Expert Q&A</h5>
+                    <p class="text-muted">Post queries to certified agricultural experts and get professional answers within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center" style="border-top: 4px solid #c62828;">
+                <div class="card-body p-4">
+                    <i class="fas fa-landmark" style="font-size: 2.5rem; color: #c62828; margin-bottom: 15px;"></i>
+                    <h5 style="color: #1b5e20; font-weight: 700;">Government Schemes</h5>
+                    <p class="text-muted">Stay updated with PM-KISAN, Fasal Bima Yojana, Kisan Credit Card and other government schemes.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 text-center" style="border-top: 4px solid #00838f;">
+                <div class="card-body p-4">
+                    <i class="fas fa-robot" style="font-size: 2.5rem; color: #00838f; margin-bottom: 15px;"></i>
+                    <h5 style="color: #1b5e20; font-weight: 700;">AI Chatbot</h5>
+                    <p class="text-muted">24/7 chatbot support for instant answers on farming, diseases, fertilizers, and market prices.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div style="background: #e8f5e9; padding: 40px 0;">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-3">
+                <h2 style="color: #2e7d32; font-weight: 800;">1000+</h2>
+                <p style="color: #555;">Registered Farmers</p>
+            </div>
+            <div class="col-md-3">
+                <h2 style="color: #2e7d32; font-weight: 800;">50+</h2>
+                <p style="color: #555;">Agricultural Experts</p>
+            </div>
+            <div class="col-md-3">
+                <h2 style="color: #2e7d32; font-weight: 800;">500+</h2>
+                <p style="color: #555;">Queries Resolved</p>
+            </div>
+            <div class="col-md-3">
+                <h2 style="color: #2e7d32; font-weight: 800;">20+</h2>
+                <p style="color: #555;">Government Schemes Listed</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

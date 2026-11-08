@@ -1,0 +1,73 @@
+{% extends 'adminpanel/base_admin.html' %}
+{% block title %}Update Crop Prices - KisanSathi{% endblock %}
+{% block admin_content %}
+<div class="page-header" style="background: linear-gradient(135deg, #b71c1c, #c62828);">
+    <h2><i class="fas fa-rupee-sign"></i> Update Crop Market Prices</h2>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <div class="card mb-4">
+            <div class="card-header" style="background: #fff3e0;"><strong><i class="fas fa-plus"></i> Add / Update Price</strong></div>
+            <div class="card-body p-4">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Crop Name *</label>
+                        <input type="text" name="crop_name" class="form-control" placeholder="e.g. Wheat, Rice" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Crop Category</label>
+                        <select name="crop_type" class="form-control">
+                            {% for val, label in crop_choices %}
+                            <option value="{{ val }}">{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Price per Quintal (₹) *</label>
+                        <input type="number" name="price_per_quintal" class="form-control" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Market Location</label>
+                        <input type="text" name="market_location" class="form-control" value="National Average">
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-block">
+                        <i class="fas fa-save"></i> Save Price
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header" style="background: #e8f5e9;"><strong>Current Prices</strong></div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead><tr><th>Crop</th><th>Price (₹/Qtl)</th><th>Market</th><th>Updated</th><th>Action</th></tr></thead>
+                        <tbody>
+                            {% for price in prices %}
+                            <tr>
+                                <td><strong>{{ price.crop_name }}</strong></td>
+                                <td style="color: #2e7d32; font-weight: bold;">₹ {{ price.price_per_quintal }}</td>
+                                <td>{{ price.market_location }}</td>
+                                <td><small>{{ price.updated_at|date:"d M Y" }}</small></td>
+                                <td>
+                                    <a href="{% url 'admin_delete_price' price.id %}"
+                                       onclick="return confirm('Delete this price?')"
+                                       class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr><td colspan="5" class="text-center text-muted py-3">No prices added yet.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
