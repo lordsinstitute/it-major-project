@@ -1,0 +1,32 @@
+{% extends 'farmer/base_farmer.html' %}
+{% block title %}AI History - KisanSathi{% endblock %}
+{% block farmer_content %}
+<div class="page-header">
+    <h2><i class="fas fa-history"></i> My AI Prediction History</h2>
+    <p>All your past AI analysis results</p>
+</div>
+{% for r in results %}
+<div class="card mb-3">
+    <div class="card-header d-flex justify-content-between" style="background: #e8f5e9;">
+        <strong>
+            {% if r.prediction_type == 'disease' %}<i class="fas fa-bug text-danger"></i> Disease Detection
+            {% elif r.prediction_type == 'yield' %}<i class="fas fa-chart-line text-warning"></i> Yield Prediction
+            {% else %}<i class="fas fa-flask text-primary"></i> Fertilizer Recommendation
+            {% endif %}
+        </strong>
+        <small class="text-muted">{{ r.created_at|date:"d M Y, H:i" }}</small>
+    </div>
+    <div class="card-body">
+        <p><strong>Input:</strong> {{ r.input_data }}</p>
+        <p><strong>Result:</strong> <span style="color: #1b5e20;">{{ r.result }}</span></p>
+        {% if r.image %}<img src="{{ r.image.url }}" style="max-height: 100px; border-radius: 8px;">{% endif %}
+    </div>
+</div>
+{% empty %}
+<div class="text-center py-5 text-muted">
+    <i class="fas fa-history fa-4x mb-3"></i>
+    <p>No AI predictions yet. Use the AI tools to get started!</p>
+    <a href="{% url 'ai_dashboard' %}" class="btn btn-green">Go to AI Tools</a>
+</div>
+{% endfor %}
+{% endblock %}

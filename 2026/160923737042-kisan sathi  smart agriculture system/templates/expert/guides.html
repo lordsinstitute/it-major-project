@@ -1,0 +1,31 @@
+{% extends 'expert/base_expert.html' %}
+{% block title %}My Guides - KisanSathi{% endblock %}
+{% block expert_content %}
+<div class="page-header" style="background: linear-gradient(135deg, #1565c0, #1976d2);">
+    <h2><i class="fas fa-book"></i> My Uploaded Guides</h2>
+</div>
+{% for guide in guides %}
+<div class="card mb-3">
+    <div class="card-header d-flex justify-content-between" style="background: #e3f2fd;">
+        <strong>{{ guide.title }}</strong>
+        <span class="badge badge-primary">{{ guide.crop }}</span>
+    </div>
+    <div class="card-body">
+        <p>{{ guide.description }}</p>
+        <div class="row">
+            <div class="col-md-4"><small><strong>English:</strong> {% if guide.content_english %}<span class="text-success">✓</span>{% else %}<span class="text-danger">✗</span>{% endif %}</small></div>
+            <div class="col-md-4"><small><strong>Telugu:</strong> {% if guide.content_telugu %}<span class="text-success">✓</span>{% else %}<span class="text-danger">✗</span>{% endif %}</small></div>
+            <div class="col-md-4"><small><strong>Hindi:</strong> {% if guide.content_hindi %}<span class="text-success">✓</span>{% else %}<span class="text-danger">✗</span>{% endif %}</small></div>
+        </div>
+        {% if guide.file %}<p class="mt-2"><a href="{{ guide.file.url }}" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fas fa-file"></i> View File</a></p>{% endif %}
+    </div>
+    <div class="card-footer text-muted"><small>Uploaded: {{ guide.created_at|date:"d M Y" }}</small></div>
+</div>
+{% empty %}
+<div class="text-center py-5 text-muted">
+    <i class="fas fa-book-open fa-4x mb-3"></i>
+    <p>No guides uploaded yet.</p>
+    <a href="{% url 'expert_upload_guide' %}" class="btn btn-primary">Upload First Guide</a>
+</div>
+{% endfor %}
+{% endblock %}

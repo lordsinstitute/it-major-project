@@ -1,0 +1,63 @@
+{% extends 'farmer/base_farmer.html' %}
+{% block title %}Connect with Farmers - KisanSathi{% endblock %}
+{% block farmer_content %}
+<div class="page-header">
+    <h2><i class="fas fa-network-wired"></i> Connect with Farmers</h2>
+    <p>Find and connect with farmers growing similar crops in your region</p>
+</div>
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="form-inline">
+            <label class="mr-3"><strong>Search by Crop:</strong></label>
+            <input type="text" name="crop" class="form-control mr-3" value="{{ searched_crop }}" placeholder="e.g. Wheat, Rice, Cotton" list="crop-list">
+            <datalist id="crop-list">
+                {% for crop in all_crops %}<option value="{{ crop }}">{% endfor %}
+            </datalist>
+            <button type="submit" class="btn btn-green"><i class="fas fa-search"></i> Search</button>
+        </form>
+    </div>
+</div>
+{% if searched_crop %}
+<h5 class="mb-3" style="color: #2e7d32;">
+    <i class="fas fa-seedling"></i> Farmers growing: <strong>{{ searched_crop }}</strong>
+    <span class="badge badge-success ml-2">{{ similar_farmers|length }} found</span>
+</h5>
+{% if similar_farmers %}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Farmer Name</th>
+                <th>Phone</th>
+                <th>Crop</th>
+                <th>Land Area</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for farmer in similar_farmers %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><i class="fas fa-user-circle text-success"></i> {{ farmer.name }}</td>
+                <td><i class="fas fa-phone"></i> {{ farmer.phone }}</td>
+                <td>{{ farmer.crop }}</td>
+                <td>{{ farmer.land_area }} acres</td>
+                <td>{{ farmer.state }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info">
+    <i class="fas fa-info-circle"></i> No other farmers found growing <strong>{{ searched_crop }}</strong>. Try a different crop name.
+</div>
+{% endif %}
+{% else %}
+<div class="text-center text-muted py-4">
+    <i class="fas fa-users fa-3x mb-3"></i>
+    <p>Enter a crop name above to find farmers growing similar crops.</p>
+</div>
+{% endif %}
+{% endblock %}

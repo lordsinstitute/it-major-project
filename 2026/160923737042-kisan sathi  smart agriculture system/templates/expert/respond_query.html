@@ -1,0 +1,56 @@
+{% extends 'expert/base_expert.html' %}
+{% block title %}Respond to Query - KisanSathi{% endblock %}
+{% block expert_content %}
+<div class="page-header" style="background: linear-gradient(135deg, #1565c0, #1976d2);">
+    <h2><i class="fas fa-reply"></i> Respond to Query</h2>
+</div>
+<div class="card mb-4">
+    <div class="card-header" style="background: #e3f2fd;">
+        <strong>{{ query.title }}</strong>
+        {% if query.crop %}<span class="badge badge-info ml-2">{{ query.crop }}</span>{% endif %}
+    </div>
+    <div class="card-body">
+        <p><strong>Farmer:</strong> {{ query.farmer.get_full_name|default:query.farmer.username }}</p>
+        <p><strong>Query:</strong></p>
+        <div class="alert alert-light border">{{ query.description }}</div>
+        <small class="text-muted">Posted: {{ query.created_at|date:"d M Y H:i" }}</small>
+    </div>
+</div>
+
+{% if existing_responses %}
+<div class="card mb-4">
+    <div class="card-header green"><i class="fas fa-comments"></i> Existing Responses</div>
+    <div class="card-body">
+        {% for resp in existing_responses %}
+        <div class="alert alert-success">
+            <strong>{{ resp.expert.get_full_name|default:resp.expert.username }}:</strong>
+            <p class="mb-0 mt-1">{{ resp.answer }}</p>
+            <small class="text-muted">{{ resp.created_at|date:"d M Y H:i" }}</small>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header" style="background: linear-gradient(135deg, #1565c0, #1976d2); color: #fff;">
+        <i class="fas fa-pen"></i> Your Response
+    </div>
+    <div class="card-body p-4">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label><strong>Write your expert answer:</strong></label>
+                <textarea name="answer" class="form-control" rows="6"
+                    placeholder="Provide detailed professional advice to help the farmer..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="fas fa-paper-plane"></i> Submit Response
+            </button>
+            <a href="{% url 'expert_queries' %}" class="btn btn-secondary btn-lg ml-2">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

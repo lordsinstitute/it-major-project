@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 sidebar px-0">
+            <div class="text-center py-3" style="background: #e3f2fd;">
+                <i class="fas fa-user-md" style="font-size: 3rem; color: #1565c0;"></i>
+                <p class="mb-0 mt-1 font-weight-bold" style="color: #0d47a1;">{{ request.user.get_full_name|default:request.user.username }}</p>
+                <small class="text-muted">Expert</small>
+            </div>
+            <nav class="nav flex-column mt-3">
+                <a class="nav-link {% if request.resolver_match.url_name == 'expert_dashboard' %}active{% endif %}" href="{% url 'expert_dashboard' %}">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'expert_upload_guide' %}active{% endif %}" href="{% url 'expert_upload_guide' %}">
+                    <i class="fas fa-upload"></i> Upload Guide
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'expert_guides' %}active{% endif %}" href="{% url 'expert_guides' %}">
+                    <i class="fas fa-book"></i> My Guides
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'expert_queries' %}active{% endif %}" href="{% url 'expert_queries' %}">
+                    <i class="fas fa-question-circle"></i> Farmer Queries
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'expert_ai_verify' %}active{% endif %}" href="{% url 'expert_ai_verify' %}">
+                    <i class="fas fa-microscope"></i> AI Suggestion
+                </a>
+                <hr>
+                <a class="nav-link text-danger" href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+        <div class="col-md-10 main-content">
+            {% block expert_content %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

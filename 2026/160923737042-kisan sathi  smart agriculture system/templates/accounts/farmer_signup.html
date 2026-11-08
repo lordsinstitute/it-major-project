@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Farmer Signup - KisanSathi{% endblock %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header green text-center py-3">
+                    <h4 class="mb-0"><i class="fas fa-user-plus"></i> Farmer Registration</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-user"></i> First Name *</label>
+                                    <input type="text" name="first_name" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Last Name *</label>
+                                    <input type="text" name="last_name" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-at"></i> Username *</label>
+                                    <input type="text" name="username" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-envelope"></i> Email</label>
+                                    <input type="email" name="email" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-lock"></i> Password *</label>
+                                    <input type="password" name="password" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Confirm Password *</label>
+                                    <input type="password" name="confirm_password" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-phone"></i> Phone Number *</label>
+                                    <input type="text" name="phone" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-map-marker-alt"></i> State</label>
+                                    <select name="state" class="form-control">
+                                        <option value="">-- Select State --</option>
+                                        <option>Andhra Pradesh</option><option>Telangana</option>
+                                        <option>Karnataka</option><option>Maharashtra</option>
+                                        <option>Punjab</option><option>Haryana</option>
+                                        <option>Uttar Pradesh</option><option>Madhya Pradesh</option>
+                                        <option>Rajasthan</option><option>Gujarat</option>
+                                        <option>Tamil Nadu</option><option>Kerala</option>
+                                        <option>Bihar</option><option>West Bengal</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-seedling"></i> Main Crop Grown</label>
+                                    <input type="text" name="crop_grown" class="form-control" placeholder="e.g. Wheat, Rice, Cotton">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-ruler-combined"></i> Land Area (Acres)</label>
+                                    <input type="number" name="land_area" class="form-control" step="0.1" min="0">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label><i class="fas fa-home"></i> Address</label>
+                                    <textarea name="address" class="form-control" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-green btn-block btn-lg mt-2">
+                            <i class="fas fa-user-plus"></i> Register as Farmer
+                        </button>
+                    </form>
+                    <hr>
+                    <p class="text-center mb-0">
+                        Already registered? <a href="{% url 'farmer_login' %}" style="color: #2e7d32; font-weight: 600;">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

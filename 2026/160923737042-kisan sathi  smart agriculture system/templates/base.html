@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}KisanSathi - AI Farmer Support{% endblock %}</title>
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --green-dark: #1b5e20;
+            --green-main: #2e7d32;
+            --green-light: #4caf50;
+            --green-pale: #e8f5e9;
+            --orange: #ff8f00;
+            --text-dark: #212121;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; color: var(--text-dark); }
+        .navbar { background: linear-gradient(135deg, var(--green-dark), var(--green-main)) !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .navbar-brand { font-weight: 700; font-size: 1.4rem; color: #fff !important; }
+        .navbar-brand span { color: var(--orange); }
+        .nav-link { color: rgba(255,255,255,0.9) !important; font-weight: 500; }
+        .nav-link:hover { color: #fff !important; }
+        .sidebar { background: #fff; border-right: 2px solid var(--green-pale); min-height: 100vh; padding: 20px 0; }
+        .sidebar .nav-link { color: var(--text-dark); padding: 10px 20px; border-radius: 0 25px 25px 0; margin-bottom: 4px; transition: all 0.2s; }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { background: var(--green-pale); color: var(--green-dark); font-weight: 600; border-left: 4px solid var(--green-main); }
+        .sidebar .nav-link i { margin-right: 10px; width: 20px; text-align: center; }
+        .main-content { padding: 30px; }
+        .card { border: none; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .card-header { border-radius: 12px 12px 0 0 !important; font-weight: 600; }
+        .card-header.green { background: linear-gradient(135deg, var(--green-main), var(--green-light)); color: #fff; }
+        .btn-green { background: var(--green-main); color: #fff; border: none; }
+        .btn-green:hover { background: var(--green-dark); color: #fff; }
+        .badge-role { font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; }
+        .stat-card { border-left: 5px solid var(--green-main); }
+        .stat-card .stat-number { font-size: 2rem; font-weight: 700; color: var(--green-main); }
+        .alert { border-radius: 10px; }
+        .page-header { background: linear-gradient(135deg, var(--green-main), var(--green-light)); color: #fff; padding: 20px 25px; border-radius: 12px; margin-bottom: 25px; }
+        .page-header h2 { margin: 0; font-weight: 700; }
+        .page-header p { margin: 5px 0 0; opacity: 0.9; }
+        footer { background: var(--green-dark); color: rgba(255,255,255,0.8); padding: 20px; text-align: center; margin-top: 40px; }
+        .result-box { background: var(--green-pale); border: 2px solid var(--green-light); border-radius: 10px; padding: 20px; margin-top: 20px; }
+        .result-box h5 { color: var(--green-dark); font-weight: 700; }
+        .table thead th { background: var(--green-main); color: #fff; border: none; }
+        .table tbody tr:hover { background: var(--green-pale); }
+        .sidebar .nav-link {
+    color: red !important;
+}
+
+.sidebar .nav-link i {
+    color: red !important;
+}
+
+.sidebar .nav-link:hover {
+    background: #ffe6e6 !important;
+    color: darkred !important;
+}
+
+.sidebar .nav-link.active {
+    background: #ffe6e6 !important;
+    color: darkred !important;
+    font-weight: 700;
+    border-left: 4px solid red;
+}
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <i class="fas fa-seedling"></i> Kisan<span>Sathi</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <span class="nav-link"><i class="fas fa-user-circle"></i> {{ user.username }}</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'farmer_login' %}">Farmer Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'expert_login' %}">Expert Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'admin_login' %}">Admin Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<!-- Messages -->
+{% if messages %}
+<div class="container-fluid pt-3">
+    {% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+<footer>
+    <p>&copy; 2024 KisanSathi - AI Assisted Farmer Support System. All rights reserved.</p>
+    <p><small>Empowering Indian Farmers with Technology</small></p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

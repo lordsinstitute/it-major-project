@@ -1,0 +1,89 @@
+{% extends 'expert/base_expert.html' %}
+{% block title %}AI Suggestion Verify - KisanSathi{% endblock %}
+{% block expert_content %}
+<div class="page-header" style="background: linear-gradient(135deg, #1565c0, #1976d2);">
+    <h2><i class="fas fa-microscope"></i> Verify AI Predictions</h2>
+    <p>Upload a crop image and verify if AI disease prediction and pesticide suggestion is correct</p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header" style="background: #e3f2fd;"><strong><i class="fas fa-upload"></i> Upload Crop Image</strong></div>
+            <div class="card-body p-4">
+                <form method="post" enctype="multipart/form-data" id="ai-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Select Crop Image *</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="image" name="image" accept="image/*" required>
+                            <label class="custom-file-label" for="image">Choose image file...</label>
+                        </div>
+                        <small class="text-muted">Supported: JPG, PNG, JPEG</small>
+                    </div>
+                    <div id="preview-box" class="text-center mb-3" style="display:none;">
+                        <img id="preview-img" src="#" alt="Preview" style="max-height:200px; border-radius:10px; border:2px solid #1976d2;">
+                    </div>
+                    <button type="submit" name="action" value="disease" class="btn btn-primary btn-block mb-2">
+                        <i class="fas fa-bug"></i> Predict Disease
+                    </button>
+                    <button type="submit" name="action" value="pesticide" class="btn btn-success btn-block">
+                        <i class="fas fa-spray-can"></i> Suggest Pesticide
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        {% if result %}
+        <div class="card">
+            <div class="card-header green"><strong><i class="fas fa-robot"></i> AI Prediction Result</strong></div>
+            <div class="card-body">
+                <div class="result-box mb-3">
+                    <h5><i class="fas fa-bug"></i> Detected Disease:</h5>
+                    <p class="h4 text-danger font-weight-bold">{{ result.disease }}</p>
+                </div>
+                <div class="result-box">
+                    <h5><i class="fas fa-spray-can"></i> Recommended Pesticide / Treatment:</h5>
+                    <p class="font-weight-bold" style="color: #1b5e20;">{{ result.pesticide }}</p>
+                </div>
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle"></i> AI Confidence: <strong>{{ result.confidence }}</strong>
+                    <br><small>As an expert, please verify this prediction and correct if needed.</small>
+                </div>
+                <div class="form-group mt-3">
+                    <label><strong>Expert Verification Note (optional):</strong></label>
+                    <textarea class="form-control" rows="3" placeholder="Add your verification notes here..."></textarea>
+                    <button class="btn btn-outline-success mt-2 btn-sm">
+                        <i class="fas fa-check"></i> Mark as Verified
+                    </button>
+                    <button class="btn btn-outline-danger mt-2 btn-sm ml-2">
+                        <i class="fas fa-times"></i> Mark as Incorrect
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center py-5 text-muted">
+            <i class="fas fa-robot fa-5x mb-3" style="color: #b0bec5;"></i>
+            <p>Upload an image and click a button to see AI predictions.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+document.getElementById('image').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        document.querySelector('.custom-file-label').textContent = file.name;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            document.getElementById('preview-img').src = ev.target.result;
+            document.getElementById('preview-box').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+{% endblock %}

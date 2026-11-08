@@ -1,0 +1,49 @@
+{% extends 'adminpanel/base_admin.html' %}
+{% block title %}All Queries - KisanSathi{% endblock %}
+{% block admin_content %}
+<div class="page-header" style="background: linear-gradient(135deg, #b71c1c, #c62828);">
+    <h2><i class="fas fa-comments"></i> All Farmer Queries & Expert Responses</h2>
+</div>
+{% for query in queries %}
+<div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center" style="background: #fafafa;">
+        <div>
+            <strong>{{ query.title }}</strong>
+            {% if query.crop %}<span class="badge badge-info ml-2">{{ query.crop }}</span>{% endif %}
+        </div>
+        <div>
+            <span class="badge badge-secondary">{{ query.farmer.get_full_name|default:query.farmer.username }}</span>
+            {% if query.status == 'answered' %}
+            <span class="badge badge-success ml-1">Answered</span>
+            {% else %}
+            <span class="badge badge-warning ml-1">Pending</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">{{ query.description }}</p>
+        <small class="text-muted">Posted: {{ query.created_at|date:"d M Y H:i" }}</small>
+        {% if query.responses.all %}
+        <hr>
+        <strong><i class="fas fa-user-md text-success"></i> Expert Responses:</strong>
+        {% for resp in query.responses.all %}
+        <div class="alert alert-success mt-2 py-2">
+            <strong>{{ resp.expert.get_full_name|default:resp.expert.username }}:</strong>
+            {{ resp.answer }}
+            <br><small class="text-muted">{{ resp.created_at|date:"d M Y H:i" }}</small>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-warning mt-2 py-2 mb-0">
+            <i class="fas fa-clock"></i> No expert response yet.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% empty %}
+<div class="text-center py-5 text-muted">
+    <i class="fas fa-inbox fa-4x mb-3"></i>
+    <p>No queries submitted yet.</p>
+</div>
+{% endfor %}
+{% endblock %}
