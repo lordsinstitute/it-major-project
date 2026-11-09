@@ -1,0 +1,7 @@
+fastapi>=0.110.0,<0.116.0
+uvicorn[standard]>=0.27.0,<0.32.0
+sqlmodel>=0.0.16,<0.0.22
+scikit-learn>=1.7.2,<1.8.0
+numpy>=2.1.0,<3.0.0
+python-dotenv>=1.0.0,<2.0.0
+sentence-transformers>=2.6.0,<4.0.0
