@@ -1,0 +1,44 @@
+:root {
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mediqo-deep-teal: #123B45;
+  --mediqo-aqua: #20A69A;
+  --mediqo-soft-mint: #D9F3EC;
+  --mediqo-off-white: #F4F7F6;
+  --mediqo-warm-coral: #FF9B71;
+  --mediqo-text: #123B45;
+  --mediqo-bg: #F4F7F6;
+  color: var(--mediqo-text);
+  background: var(--mediqo-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  color: #123B45;
+  background: #D9F3EC;
+}
