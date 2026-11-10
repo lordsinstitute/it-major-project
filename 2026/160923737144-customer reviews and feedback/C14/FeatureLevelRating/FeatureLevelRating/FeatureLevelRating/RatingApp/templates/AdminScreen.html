@@ -1,0 +1,74 @@
+{% load static %}
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>A Sentiment-Aware Feature Rating Framework Using Customer Reviews and Voting Patterns   </title>
+<meta name="keywords" content="" />
+<meta name="Premium Series" content="" />
+<link href="{% static 'default.css' %}" rel="stylesheet" type="text/css" media="screen" />
+<style>
+body {
+  background-image: url("{% static 'images/back.jpg' %}");
+}
+</style>
+</head>
+<body>
+<!-- start header -->
+<div id="header">
+	<div id="logo">
+		<h1><span><center><font size="5" color="white"><br/>A Sentiment-Aware Feature Rating Framework Using Customer Reviews and Voting Patterns   
+</center></span></h1>
+		
+	</div>
+	<div id="menu">
+		<ul id="main">
+			<li class="current_page_item"><a href="{% url 'AddProduct' %}"><font size="3" color="white">Add Products</a></li><td></td>
+			<li><a href="{% url 'RemoveProduct' %}"><font size="3" color="white">Remove Products</a></li><td></td>
+			<li><a href="{% url 'ViewUserReviews' %}"><font size="3" color="white">View User Reviews</a></li><td></td>
+			<li><a href="{% url 'Analysis' %}"><font size="3" color="white">Analysis</a></li><td></td>
+			<li><a href="{% url 'index' %}"><font size="3" color="white">Logout</a></li><td></td>
+			<td></td>		
+     
+		</ul>
+		
+	</div>
+	
+</div>
+<div id="wrapper">
+	<!-- start page -->
+	<div id="page">
+		
+		<!-- start content -->
+		<div id="content">
+			<div class="flower"><img src="{% static 'images/tra.jpg' %}" alt="" width="500" height="200" /></center></div>
+			<br/><br/>
+
+			<center><font face="verdana" color="black">{{ data|safe }}</center></font><br/>
+		<img src="data:image/png;base64, {{ img }}" alt="" />
+	
+		<center>
+		
+			<table align="center">
+			<tr>
+			<h3>
+			</p></h3>
+			</table>
+			</center><br /><div class="post">
+				
+				<div class="entry">
+					
+				</div>
+			</div>
+		</div>
+		<!-- end content -->
+		<!-- start sidebars -->
+		
+		<!-- end sidebars -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	<!-- end page -->
+</div>
+</body>
+</html>
+
+

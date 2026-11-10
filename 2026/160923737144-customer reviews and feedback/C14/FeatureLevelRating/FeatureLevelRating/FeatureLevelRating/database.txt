@@ -1,0 +1,27 @@
+create database featurerating;
+use featurerating;
+
+create table register(username varchar(30) primary key,
+password varchar(30),
+contact varchar(12),
+email varchar(30),
+address varchar(40));
+
+create table product(product_id int,
+product_name varchar(50),
+price varchar(30),
+buying_price varchar(30),
+quantity varchar(30),
+description varchar(150),
+suggest varchar(50),
+company_name varchar(50),
+company_details varchar(150),
+amount varchar(30),
+paying_mode varchar(30),
+product_type varchar(50),
+filename varchar(50),
+upload_date varchar(40));
+
+create table reviews(username varchar(50), product_name varchar(50), front_camera varchar(50),
+rear_camera varchar(50), speaker varchar(50), screen varchar(50), overall_rating varchar(50), sentiment varchar(30));
+
