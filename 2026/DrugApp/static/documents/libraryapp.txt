@@ -1,0 +1,69 @@
+C:\Users\Admin\AppData\Local\Programs\Python\Python37\Scripts\
+
+C:\Users\Admin\AppData\Local\Programs\Python\Python37\
+
+
+Based on the above analysis, we propose a chaotic
+image encryption algorithm based on coordinate descent and
+SHA-256. This solution can effectively solve the above problems.
+First, random pixels are inserted before SHA-256 acts
+on the normal image to ensure that each encryption uses
+a different seed key. Second, we propose SEA, which is a
+simple and fast pseudo-random sequence generator. Third,
+we improve PWLCM to FI-PWLCM, which has more control
+parameters than PWLCM and can generate more complex
+chaotic sequences. Finally, we propose the SCD algorithm
+based on the idea of coordinate descent method to enhance
+the resistance of cryptosystems to statistical attacks. Both
+SEA and FI-PWLCM can generate random sequences that
+correspond one-to-one to 32-byte hashes, making the algorithm
+conform to the cryptographic rule of one-time pad.
+Compared with existing meta-heuristic image encryption
+algorithms, the proposed SCD algorithm can signicantly
+optimize the histogram statistical properties of cryptographic
+images.
+
+
+
+
+Basically our project is a library management app. We have to create an app that scans qr /barcode to borrow books. Two types of users are 
+there: student and admin. Student creates account using id no. Books are borrowed by students by scanning, and students are reminded to 
+return books through notifications. Admin should be able to add and remove books from library database. In addition, books dhi pdf format kuda
+chupiyali. Not all books will have pdf format. Only the ones the admin provides will have pdf format.
+
+Features of app:
+
+Virtual book club integration: 
+
+ It enables the users to connect, discuss, debate and deepen their appreciation for literature in a digital community setting.  
+
+Detailed book information:  
+
+This offers book details such as author, publication year, page count and concise summaries to help in informed decision-making  
+
+PDF access:  
+
+Virtual access to books that are high on demand allowing access to the material when not available  
+
+Recommendations: 
+
+ Recommendation of the books available in the library based on genre of interest and previous book issues. 
+
+Event updates:  
+
+Serves as a centre for communicating library related matters.   
+
+Do this app and fill in these documentation for the project:
+
+
+Bookkeeping Using QR (Involved Librarian and Reader) 
+
+Detailed Book Information 
+
+PDF Access 
+
+Recommendations 
+
+Event Updates 
+
+Virtual Book Club Integration 
