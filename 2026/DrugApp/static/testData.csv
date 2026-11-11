@@ -1,0 +1,13 @@
+DrugID,Formula,DrugName,Target,Disease
+DB13855,C12H9N3O5,Nifuroxazide,Bacterial enzymes,Diarrhoea
+DB00746,C25H48N6O8,Deferoxamine,Iron ions,Acute iron or aluminum toxicity
+DB14480,C5H10N2O2S,Acetylcysteine amide,glutathione,Acetaminophen toxicity
+DB00571,C16H21NO2,Propranolol,ADRB1,Migraine
+DB01136,C24H26N2O4,Carvedilol,Adrenergic receptors,Congestive heart failure; Hypertension; Depression
+DB00675,C26H29NO,Tamoxifen,ESR1,Breast cancer
+DB01069,C17H20N2S,Promethazine,HRH1,Nausea
+DB00786,C15H29N3O5,Marimastat,MMP1; MMP2; MMP7,Pancreatic cancer; Lung cancer; Tissue repair disorder; Tumor development; Inflammatory disorder
+DB06145,C43H74N2O14,Spiramycin,Gram-positive bacteria,Bacterial infection
+DB00571,C16H21NO2,Propranolol,ADRB1,Migraine
+DB00613,C20H22ClN3O,Amodiaquine,HNMT,Malaria
+DB00938,C25H37NO4,Salmeterol,ADRB2,Asthma; Chronic obstructive pulmonary disease
