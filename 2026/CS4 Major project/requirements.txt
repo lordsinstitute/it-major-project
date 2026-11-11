@@ -1,0 +1,2 @@
+pipecat-ai[deepgram,openai,elevenlabs,silero,webrtc,websocket,runner]==1.10.0
+tzdata>=2025.1
