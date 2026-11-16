@@ -1,0 +1,8 @@
+create database video;
+use video;
+
+create table users(username varchar(50) primary key,
+password varchar(50),
+email varchar(50),
+contact_no varchar(30),
+address varchar(130));
