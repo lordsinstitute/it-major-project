@@ -1,0 +1,2 @@
+python WatchDog.py
+pause
